@@ -18,20 +18,18 @@ def wait_until(&b)
 end
 
 def wait_until_download(file)
-  wait_until do 
-    prev_size = -1
-    wait_until do
-      if File.exists?(file)
-        size = File.size(file)
-        ret = if size == prev_size
-                true
-              else
-                prev_size = size
-                false
-              end
-        sleep 1
-        ret
-      end
+  prev_size = -1
+  wait_until do
+    if File.exists?(file)
+      size = File.size(file)
+      ret = if size == prev_size
+              true
+            else
+              prev_size = size
+              false
+            end
+      sleep 1
+      ret
     end
   end
 end
